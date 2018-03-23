@@ -1,5 +1,6 @@
 package com.hbu.kindergarten.DAO;
 
+import java.security.MessageDigest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -16,6 +17,8 @@ import com.hbu.kindergarten.model.User;
  *
  */
 public class UserDAO {
+	
+	
 	public User getUser(String username) throws SQLException {
 		User user = new User();
 

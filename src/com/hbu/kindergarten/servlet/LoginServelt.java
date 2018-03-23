@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.hbu.kindergarten.model.User;
 import com.hbu.kindergarten.service.UserService;
+import com.hbu.kindergarten.util.MD5Util;
 import com.mysql.cj.api.Session;
 
 @WebServlet(name="login",urlPatterns="/login")
@@ -28,19 +29,19 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		if(user==null)
 		{
 			req.setAttribute("error","用户名不存在");
-			System.out.println(1);
+			
 			req.getRequestDispatcher("login.html").forward(req, resp);
 		}
 		else
 		{
-			if(user.getPassword().equals(req.getParameter("password")))
+			if(user.getPassword().equals(MD5Util.MD5(req.getParameter("password"))))
 			{
 				req.getSession().setAttribute("username",user);
 				req.getRequestDispatcher("index.html").forward(req, resp);
 			}
 			else {
 				req.setAttribute("error","用户名或密码错误");
-				System.out.println(req.getParameter("password"));
+				
 				req.getRequestDispatcher("login.html").forward(req, resp);
 			}
 		}

@@ -14,6 +14,8 @@ public class User {
 	private String username;
 	private String password;
 	private String rolename;
+	private Integer logintime;
+	private Integer updatetime;
 	private List<Menu> menus=new ArrayList<>();
 	public String getUsername() {
 		return username;
@@ -52,6 +54,18 @@ public class User {
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", rolename=" + rolename + ", menus=" + menus
 				+ "]";
+	}
+	public Integer getUpdatetime() {
+		return updatetime;
+	}
+	public void setUpdatetime(Integer updatetime) {
+		this.updatetime = updatetime;
+	}
+	public Integer getLogintime() {
+		return logintime;
+	}
+	public void setLogintime(Integer logintime) {
+		this.logintime = logintime;
 	}
 	
 	

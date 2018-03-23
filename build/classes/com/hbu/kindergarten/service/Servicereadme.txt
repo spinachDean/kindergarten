@@ -1,0 +1,7 @@
+Service层的作用是从Controller（Servlet）层获取数据 对数据的进行加工后传给DAO层进行数据的CRUD
+Service层不可以省略，这是Controller层唯一交互的层，Controller层不可以直接操作DAO和数据库
+Service层的命名规则是根据其职责命名 比如有关用户的Service就命名为UserService
+Service层不能含有成员变量，必须是单例模式，可参考UserService的静态内部类的实现方式：SingletonHolder
+
+
+
