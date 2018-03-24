@@ -20,16 +20,16 @@ public class UserDAO {
 	
 	
 	public User getUser(String username) throws SQLException {
-		User user = new User();
-
+		User user = null;
 		Connection conn = DataConfig.getConn();
 		PreparedStatement pr = conn.prepareStatement(
 				"select username,password,roleName,uri from user u,role r,menu m,rolemenu rm where username=? and "
 						+ "u.roleID=r.roleID and r.roleID=rm.roleID and rm.menuID=m.menuID");
 		pr.setString(1, username);
 		ResultSet rs = pr.executeQuery();
-
 		while (rs.next()) {
+			user= new User();
+			System.out.println(rs.getString("username"));
 			user.setUsername(username);
 			user.setPassword(rs.getString("password"));
 			user.setRolename(rs.getString("roleName"));

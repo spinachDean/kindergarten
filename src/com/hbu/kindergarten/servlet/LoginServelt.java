@@ -26,10 +26,9 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		String username=req.getParameter("username");
 		UserService userService=UserService.getInstance();
 		User user=userService.getUser(username);
-		if(user==null)
+		if(user==null||user.getUsername()==null)
 		{
 			req.setAttribute("error","用户名不存在");
-			
 			req.getRequestDispatcher("login.html").forward(req, resp);
 		}
 		else

@@ -14,6 +14,7 @@ public class User {
 	private String username;
 	private String password;
 	private String rolename;
+	private String roleid;
 	private Integer logintime;
 	private Integer updatetime;
 	private List<Menu> menus=new ArrayList<>();
@@ -66,6 +67,12 @@ public class User {
 	}
 	public void setLogintime(Integer logintime) {
 		this.logintime = logintime;
+	}
+	public String getRoleid() {
+		return roleid;
+	}
+	public void setRoleid(String roleid) {
+		this.roleid = roleid;
 	}
 	
 	

@@ -48,6 +48,7 @@ public class AuthFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request=(HttpServletRequest)req;
 		String url=request.getServletPath();
+		System.out.println(url);
 		if(ignore(url))
 		{	fc.doFilter(req, reps);
 			return;
@@ -64,7 +65,6 @@ public class AuthFilter implements Filter {
 				}
 			}
 		}
-		System.out.println("无权限");
 		HttpServletResponse response=(HttpServletResponse)reps;
 		response.sendRedirect("unauthorized.html");
 		
