@@ -28,6 +28,7 @@ public class AuthFilter implements Filter {
 		ignoreURL.add("/temp/*");
 		ignoreURL.add("/static/*");
 		ignoreURL.add("/lib/*");
+		ignoreURL.add("/404.html");
 	}
 	@Override
 	public void destroy() {
@@ -48,7 +49,6 @@ public class AuthFilter implements Filter {
 			throws IOException, ServletException {
 		HttpServletRequest request=(HttpServletRequest)req;
 		String url=request.getServletPath();
-		System.out.println(url);
 		if(ignore(url))
 		{	fc.doFilter(req, reps);
 			return;
@@ -58,11 +58,13 @@ public class AuthFilter implements Filter {
 		{
 			for(Menu menu:user.getMenus())
 			{
+				
 				if(menu.equal(url))
 				{
 					fc.doFilter(req, reps);
 					return;
 				}
+
 			}
 		}
 		HttpServletResponse response=(HttpServletResponse)reps;

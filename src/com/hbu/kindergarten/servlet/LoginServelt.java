@@ -15,6 +15,7 @@ import com.mysql.cj.api.Session;
 
 @WebServlet(name="login",urlPatterns="/login")
 public class LoginServelt extends HttpServlet {
+
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
@@ -29,14 +30,14 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 		if(user==null||user.getUsername()==null)
 		{
 			req.setAttribute("error","用户名不存在");
-			req.getRequestDispatcher("login.html").forward(req, resp);
+			req.getRequestDispatcher("/index").forward(req, resp);
 		}
 		else
 		{
 			if(user.getPassword().equals(MD5Util.MD5(req.getParameter("password"))))
 			{
 				req.getSession().setAttribute("username",user);
-				req.getRequestDispatcher("index.html").forward(req, resp);
+				req.getRequestDispatcher("/index").forward(req, resp);
 			}
 			else {
 				req.setAttribute("error","用户名或密码错误");

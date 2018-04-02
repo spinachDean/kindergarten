@@ -63,8 +63,8 @@ public class Menu {
 	}
 public static void main(String[] args) {
 	Menu m=new Menu();
-	m.uri="/admin/*";
-	System.out.println(m.equal("/admin/123"));
+	m.uri="/*";
+	System.out.println(m.equal("/index"));
 }
 
 	

@@ -23,17 +23,21 @@ public class UserDAO {
 		User user = null;
 		Connection conn = DataConfig.getConn();
 		PreparedStatement pr = conn.prepareStatement(
-				"select username,password,roleName,uri from user u,role r,menu m,rolemenu rm where username=? and "
+				"select u.roleID roleid,username,password,roleName,uri from t_user u,t_role r,t_menu m,t_rolemenu rm where username=? and "
 						+ "u.roleID=r.roleID and r.roleID=rm.roleID and rm.menuID=m.menuID");
 		pr.setString(1, username);
 		ResultSet rs = pr.executeQuery();
-		while (rs.next()) {
+		if(rs.next())
+		{
 			user= new User();
-			System.out.println(rs.getString("username"));
 			user.setUsername(username);
 			user.setPassword(rs.getString("password"));
 			user.setRolename(rs.getString("roleName"));
+			user.setRoleid(rs.getString("roleid"));
 			user.getMenus().add(new Menu(rs.getString("uri")));
+			while (rs.next()) {
+				user.getMenus().add(new Menu(rs.getString("uri")));
+			}
 		}
 		rs.close();
 		pr.close();
@@ -45,7 +49,7 @@ public class UserDAO {
 
 		Connection conn = DataConfig.getConn();
 
-		PreparedStatement pr = conn.prepareStatement("select roleID from role where rolename=?");
+		PreparedStatement pr = conn.prepareStatement("select roleID from t_role where rolename=?");
 		pr.setString(1, user.getRolename());
 
 		ResultSet rs = pr.executeQuery();
