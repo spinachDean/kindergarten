@@ -1,6 +1,6 @@
 package com.hbu.kindergarten.model;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Clas {
 
@@ -12,10 +12,10 @@ public class Clas {
 	private String cDescription;     //班级描述
 	private String username;       //用户名
 	private String kgId;          //幼儿园id
-	private Date INSDATE;
-	private Integer INSUSERID;
-	private Date UPDATET;
-	private Integer UPUSERID;
+	private Date INSDATE;        //插入日期
+	private Integer INSUSERID;			//插入用户id
+	private Date UPDATET;			//更新日期
+	private Integer UPUSERID;			//更新用户id
 
 	
 	public Clas(Integer cId, String cName, String cAlias, Integer cContent, String cConcact, String cDescription,
@@ -33,6 +33,11 @@ public class Clas {
 		INSUSERID = iNSUSERID;
 		UPDATET = uPDATET;
 		UPUSERID = uPUSERID;
+	}
+
+
+	public Clas() {
+		super();
 	}
 
 
