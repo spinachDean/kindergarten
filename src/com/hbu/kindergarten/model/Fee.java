@@ -104,6 +104,11 @@ public class Fee {
 		UPDATET = uPDATET;
 		UPUSERID = uPUSERID;
 	}
+	
+	
+	public Fee() {
+		super();
+	}
 
 	
 	
