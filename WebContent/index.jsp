@@ -1,4 +1,4 @@
-﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 String path = request.getContextPath();
@@ -161,7 +161,6 @@ function myselfinfo(){
 		content: '<div>管理员信息</div>'
 	});
 }
-
 /*资讯-添加*/
 function article_add(title,url){
 	var index = layer.open({
@@ -193,8 +192,6 @@ function product_add(title,url){
 function member_add(title,url,w,h){
 	layer_show(title,url,w,h);
 }
-
-
 </script> 
 
 <!--此乃百度统计代码，请自行删除-->

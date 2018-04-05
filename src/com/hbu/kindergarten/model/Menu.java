@@ -61,11 +61,7 @@ public class Menu {
 		if(c1.length!=c2.length)return false;
 		return true;
 	}
-public static void main(String[] args) {
-	Menu m=new Menu();
-	m.uri="/*";
-	System.out.println(m.equal("/index"));
-}
+
 
 	
 

@@ -14,7 +14,7 @@ public class CacheUtil {
 	}
 	public static void clean(String cacheName)
 	{
-		cache.put(cacheName,null);
+		cache.remove(cacheName);
 	}
 }
 

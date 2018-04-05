@@ -17,14 +17,14 @@ import javax.servlet.http.HttpServletResponse;
 import com.hbu.kindergarten.model.Menu;
 import com.hbu.kindergarten.model.User;
 
-@WebFilter(filterName = "encoding", urlPatterns = "/*")
+@WebFilter(filterName = "auth", urlPatterns = "/*")
 public class AuthFilter implements Filter {
 	private static List<String> ignoreURL=new ArrayList<>();
 	static {
 		ignoreURL.add("/login*");
 		ignoreURL.add("/register*");
 		ignoreURL.add("/");
-		ignoreURL.add("/unauthorized.html");
+		ignoreURL.add("/unauthorized.jsp");
 		ignoreURL.add("/temp/*");
 		ignoreURL.add("/static/*");
 		ignoreURL.add("/lib/*");
@@ -47,6 +47,7 @@ public class AuthFilter implements Filter {
 	@Override
 	public void doFilter(ServletRequest req, ServletResponse reps, FilterChain fc)
 			throws IOException, ServletException {
+		
 		HttpServletRequest request=(HttpServletRequest)req;
 		String url=request.getServletPath();
 		if(ignore(url))
@@ -54,6 +55,7 @@ public class AuthFilter implements Filter {
 			return;
 		}
 		User user=(User) request.getSession().getAttribute("username");
+		System.out.println("权限检查");
 		if(user!=null)
 		{
 			for(Menu menu:user.getMenus())
@@ -68,8 +70,8 @@ public class AuthFilter implements Filter {
 			}
 		}
 		HttpServletResponse response=(HttpServletResponse)reps;
-		response.sendRedirect("unauthorized.html");
 		
+		response.sendRedirect(request.getContextPath()+"/unauthorized.jsp");
 		
 	}
 

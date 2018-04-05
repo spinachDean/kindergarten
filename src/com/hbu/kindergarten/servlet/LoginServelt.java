@@ -19,7 +19,7 @@ public class LoginServelt extends HttpServlet {
 @Override
 protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 	
-	resp.sendRedirect("/login.html");
+	resp.sendRedirect(req.getContextPath()+"/login.jsp");
 }
 @Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -42,7 +42,7 @@ protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws Se
 			else {
 				req.setAttribute("error","用户名或密码错误");
 				
-				req.getRequestDispatcher("login.html").forward(req, resp);
+				req.getRequestDispatcher("/login.jsp").forward(req, resp);
 			}
 		}
 	}

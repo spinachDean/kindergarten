@@ -19,15 +19,19 @@ public class MenuService {
 	public static final MenuService getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
+	public static final String MENUCACHE="menulist";
+	public static final String ROLECACHE="roleName";
+
 	public List<MenuList> getMenuList()
 	{
-		List<MenuList> menuLists=(List<MenuList>) CacheUtil.getCache("menulist");
+		List<MenuList> menuLists=(List<MenuList>) CacheUtil.getCache(MENUCACHE);
 		try {
 			if(menuLists==null)
 			{
 				menuLists= menuDAO.getMenuList();
 				CacheUtil.putCache("menulist", menuLists);
 			}
+			
 			 return menuLists;
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -45,7 +49,7 @@ public class MenuService {
 		Integer id=null;
 		try {
 			id=new Integer(roleID);
-			Map<Integer,String> map=(Map<Integer, String>) CacheUtil.getCache("roleName");
+			Map<String,String> map=(Map<String, String>) CacheUtil.getCache(ROLECACHE);
 			if(map==null)
 			{
 				map=menuDAO.getRoleNameMap();
@@ -57,18 +61,55 @@ public class MenuService {
 		{
 			return null;
 		}
-
-		
 	}
 	public String addMenuList(MenuList m,String id)
 	{
+		//如果有id则执行修改方法
+		if(m.getId()!=null)
+		{
+			return updateMenuList(id, m);
+		}
 		ChangeStatus cs=new ChangeStatus();
 		cs.setINSDATE(new Date());
 		cs.setINSUSERID(id);
 		try {
 			menuDAO.addMenuList(m, cs);
+			CacheUtil.clean(MENUCACHE);
+			//更新缓存
 			return "添加成功";
-		} catch (SQLException e) {
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "出现错误";
+		}
+		
+	}
+	public String deleteMenuList(String userID,Integer menuListID)
+	{
+		ChangeStatus cs=new ChangeStatus();
+		cs.setUPDATET(new Date());
+		cs.setINSUSERID(userID);
+		try {
+			menuDAO.deleteMenuList(menuListID,cs);
+			CacheUtil.clean(MENUCACHE);
+			return "删除成功";
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return "出现错误";
+		}
+		
+	}
+	public String updateMenuList(String userID,MenuList menuList)
+	{
+		ChangeStatus cs=new ChangeStatus();
+		cs.setUPDATET(new Date());
+		cs.setINSUSERID(userID);
+		try {
+			menuDAO.updateMenuList(menuList, cs);
+			CacheUtil.clean(MENUCACHE);
+			return "更新成功";
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return "出现错误";
